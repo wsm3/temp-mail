@@ -1,6 +1,6 @@
 const axios         = require("axios").default;
-const md5           = require('./md5');
-const rapidapi_key  = ''
+const crypto        = require('crypto');
+const rapidapi_key  = 'cbc84e790dmshfe062552c9a2011p16c937jsn5e2467b806ee'
 
 let delay_waiting = 30;
 
@@ -55,6 +55,10 @@ const getEmailURL = async (email) => {
     return await getUrlFromHTML(data[0]['mail_text'])
 }
 
+const getEmailHash = (email) => {
+    return crypto.createHash('md5').update(email).digest('hex');
+}
+
 const getUrlFromHTML = async (html) => {
     let url     = false;
     let patt    = /<a[^>]*href=["']([^"']*)["']/g;
@@ -69,7 +73,7 @@ const getAvailableDomains = async () => {
 }
 
 const getEmailContent = async (email) => {
-    const email_hash = md5(email);
+    const email_hash = getEmailHash(email);
     return await ApiRequest(`mail/id/${email_hash}/`);
 }
 
