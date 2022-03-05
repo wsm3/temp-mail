@@ -1,6 +1,6 @@
 const axios         = require("axios").default;
 const crypto        = require('crypto');
-const rapidapi_key  = 'cbc84e790dmshfe062552c9a2011p16c937jsn5e2467b806ee'
+const rapidapi_key  = ''
 
 let delay_waiting = 30;
 
